@@ -4,7 +4,7 @@ from image_app_core import start_server_process, get_control_instruction, put_ou
 import camera_stream
 
 
-TIMEOUT_IN = 1
+TIMEOUT_IN_SECONDS = 1
 
 class ManualDriveBehavior(object):
     def __init__(self, robot):
@@ -22,7 +22,7 @@ class ManualDriveBehavior(object):
         command = instruction['command']
         if command == "set_left":
             self.robot.set_left(int(instruction['speed']))
-        elif command == "set_right":
+        elif command == "set_right": 
             self.robot.set_right(int(instruction['speed']))
         elif command == "exit":
             print("stopping")
@@ -52,7 +52,7 @@ class ManualDriveBehavior(object):
             self.make_display(frame)
             self.process_control()
             # Auto stop
-            if time.time() > self.last_time + TIMEOUT_IN:
+            if time.time() > self.last_time + TIMEOUT_IN_SECONDS:
                 self.robot.stop_motors()
 
 print("Setting up")
